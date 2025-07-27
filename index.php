@@ -50,16 +50,33 @@ var_dump($hotels);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 
 
-<table>
+<table class="table">
     <tr>
-<?php foreach ($hotels[0] as $key => $value) {
-    echo "<th> $key </th>";
-}?>
+        <?php foreach ($hotels[0] as $key => $value) {
+            echo "<th> $key </th>";
+        }
+
+
+?>
+
     </tr>
+    <?php foreach ($hotels as $hotel) { ?>
+
+        <tr>
+            <td><?php echo $hotel['name'] ?></td>
+            <td><?php echo $hotel['description'] ?></td>
+            <td><?php echo $hotel['parking'] ? "yes" : "no" ?></td>
+            <td><?php echo $hotel['vote'] ?></td>
+            <td><?php echo $hotel['distance_to_center'] . " km" ?></td>
+        </tr>
+
+
+<?php } ?>
 </table>
 
 
