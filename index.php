@@ -46,6 +46,11 @@ if (isset($_GET['parking']) && $_GET['parking'] == 'on') {
     $parking_request = true;
 }
 
+$minimun_vote = 0;
+if (isset($_GET['minimun_vote']) && $_GET['minimun_vote'] >= 0 && $_GET['minimun_vote'] <= 5) {
+    $minimun_vote = (int)$_GET['minimun_vote'];
+}
+
 
 ?>
 
@@ -63,10 +68,13 @@ if (isset($_GET['parking']) && $_GET['parking'] == 'on') {
     <hr>
     <h2>Filters</h2>
 
-    <form action="">
+    <form action="" class="form-control d-flex gap-3 align-items-center">
         <input type="checkbox" name="parking" id="parking">
         <label for="parking">Parking</label>
-        <button type="submit">Filter</button>
+       
+        <input type="number" name="minimun_vote" id="minimun_vote" min="0" max="5">
+         <label for="minimum_vote">Minimum Vote</label>
+        <button type="submit" class="btn btn-primary">Filter</button>
     </form>
 
 
@@ -87,6 +95,10 @@ if (isset($_GET['parking']) && $_GET['parking'] == 'on') {
             if (!$hotel['parking']) {
                 continue;
             }
+        }
+
+        if ($hotel['vote'] < $minimun_vote) {
+            continue;
         }
 
         ?>
