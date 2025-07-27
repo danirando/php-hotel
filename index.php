@@ -39,7 +39,12 @@ $hotels = [
 
     ];
 
-var_dump($hotels);
+
+$parking_request = false;
+
+if (isset($_GET['parking']) && $_GET['parking'] == 'on') {
+    $parking_request = true;
+}
 
 
 ?>
@@ -53,6 +58,16 @@ var_dump($hotels);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+<div class="container">
+    <h1>Hotels</h1>
+    <hr>
+    <h2>Filters</h2>
+
+    <form action="">
+        <input type="checkbox" name="parking" id="parking">
+        <label for="parking">Parking</label>
+        <button type="submit">Filter</button>
+    </form>
 
 
 <table class="table">
@@ -65,7 +80,18 @@ var_dump($hotels);
 ?>
 
     </tr>
-    <?php foreach ($hotels as $hotel) { ?>
+    <?php foreach ($hotels as $hotel) {
+
+        if ($parking_request) {
+
+            if (!$hotel['parking']) {
+                continue;
+            }
+        }
+
+        ?>
+
+
 
         <tr>
             <td><?php echo $hotel['name'] ?></td>
@@ -77,7 +103,8 @@ var_dump($hotels);
 
 
 <?php } ?>
-</table>
+</table></div>
+
 
 
 
